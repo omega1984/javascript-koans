@@ -97,9 +97,20 @@ describe("About Applying What We Have Learnt", function() {
 
   /*********************************************************************************/
   /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
-  it("should find the largest prime factor of a composite number", function () {
   
+  it("should find the largest prime factor of a composite number", function () {
+    var largestPrimeFactor = function(num){
+      var i = 2;
+      while (i <= num){
+        if (num % i === 0){
+          num = num / i;
+        }else{
+          i++;
+        }
+      }
+      return i;
+    }
+    expect(largestPrimeFactor(100)).toEqual(5);
   });
 
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
@@ -118,5 +129,5 @@ describe("About Applying What We Have Learnt", function() {
   it("should find the 10001st prime", function () {
 
   });
-  */
+  
 });
