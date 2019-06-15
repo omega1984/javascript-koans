@@ -114,20 +114,80 @@ describe("About Applying What We Have Learnt", function() {
   });
 
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
-    
+    var largestPalindrome = function(num1, num2){
+      if (num1 < 100 || num2 < 100) return "N/A"
+      var result = [];
+      var product;
+
+      for (var i = 100; i <= num1; i++){
+        for (var j = 100; j <= num2; j++){
+          product = i * j;
+          if (isPalindrome(product)){
+            result.push(product);
+          }
+        }
+      }
+      return Math.max.apply(null, result);
+    }
+    var isPalindrome = function(number){
+      return number.toString() === number.toString().split("").reverse().join("");
+    }
+    expect(largestPalindrome(500, 600)).toEqual(272272);
   });
 
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
-      
-    
+    var divisible = function(limit){
+      var num = 40;
+      for (var i = 1; i <= limit; i++){
+        if (num % i !== 0){
+          num++;
+          i = 1;
+        }
+        if (num % i === 0 && i === limit){
+          return num;
+        }
+      }
+    }
+    expect(divisible(20)).toEqual(232792560);
   });
 
   it("should find the difference between the sum of the squares and the square of the sums", function () {
-    
+    var sumSquare = function(num){
+      var numArr = _.range(num+1).slice(1);
+      var sum = numArr.reduce((a, b) => a + b);
+      var square = sum **2;
+      var squareArr = numArr.map(item => item **2);
+
+      return square - squareArr.reduce((a, b) => a + b);
+    }
+    expect(sumSquare(3)).toBe(22);
   });
 
   it("should find the 10001st prime", function () {
+    var findPrime = function(){
+      var arr = [];
+      var i = 2;
+      while (arr.length < 10001){
+        if (isPrime(i)){
+          arr.push(i);
+          i++;
+        }else{
+          i++;
+        }
+      }
+      return arr.pop();
+    }
 
+    var isPrime = function(num){
+      var limit = Math.sqrt(num);
+      for (var i = 2; i <= limit; i++){
+        if (num % i === 0){
+          return false;
+        }
+      }
+      return true;
+    }
+    expect(findPrime()).toBe(104743);
   });
   
 });
